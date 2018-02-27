@@ -33,7 +33,7 @@ iplotCorr = function(widgetdiv, data, chartOpts) {
   corcolors = (ref3 = chartOpts != null ? chartOpts.corcolors : void 0) != null ? ref3 : [
     "darkslateblue",
     "white",
-    "crimson" // heat map colors (same length as `zlim`)
+    "crimson" // heat map colors (same length as zlim)
   ];
   zlim = (ref4 = chartOpts != null ? chartOpts.zlim : void 0) != null ? ref4 : [
     -1,
