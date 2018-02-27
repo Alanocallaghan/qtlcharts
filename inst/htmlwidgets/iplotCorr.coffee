@@ -13,6 +13,7 @@ HTMLWidgets.widget({
           .attr("width", width)
           .attr("height", height)
           .attr("class", "qtlcharts")
+        {lastValue: null}
 
     ## https://github.com/Alanocallaghan/d3heatmap/blob/master/inst/htmlwidgets/d3heatmap.js
     renderValue: (widgetdiv, x, instance) ->
@@ -20,6 +21,8 @@ HTMLWidgets.widget({
 
     doRenderValue: (widgetdiv, x, instance) ->
 
+        instance.lastValue = x
+        
         svg = d3.select(widgetdiv).select("svg")
 
         # clear svg and remove tool tips

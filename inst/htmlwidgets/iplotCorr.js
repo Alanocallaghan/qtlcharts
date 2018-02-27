@@ -9,7 +9,10 @@ HTMLWidgets.widget({
       // prefer aspect ratio width/height = 2
       height = width / 2;
     }
-    return d3.select(widgetdiv).append("svg").attr("width", width).attr("height", height).attr("class", "qtlcharts");
+    d3.select(widgetdiv).append("svg").attr("width", width).attr("height", height).attr("class", "qtlcharts");
+    return {
+      lastValue: null
+    };
   },
   //# https://github.com/Alanocallaghan/d3heatmap/blob/master/inst/htmlwidgets/d3heatmap.js
   renderValue: function(widgetdiv, x, instance) {
@@ -17,6 +20,7 @@ HTMLWidgets.widget({
   },
   doRenderValue: function(widgetdiv, x, instance) {
     var chartOpts, height, ref, ref1, ref2, svg, widgetid, width;
+    instance.lastValue = x;
     svg = d3.select(widgetdiv).select("svg");
     // clear svg and remove tool tips
     svg.selectAll("*").remove();

@@ -7,16 +7,15 @@ HTMLWidgets.widget({
     type: "output",
 
     initialize: (widgetdiv, width, height) ->
-        d3.select(widgetdiv).append("svg")
-          .attr("width", width)
-          .attr("height", height)
-          .attr("class", "qtlcharts")
+        {lastValue: null}
 
     ## https://github.com/Alanocallaghan/d3heatmap/blob/master/inst/htmlwidgets/d3heatmap.js
     renderValue: (widgetdiv, x, instance) ->
         this.doRenderValue(widgetdiv, x, instance)
 
     doRenderValue: (widgetdiv, x, instance) ->
+
+        instance.lastValue = x
 
         svg = d3.select(widgetdiv).select("svg")
 
