@@ -24,7 +24,7 @@ HTMLWidgets.widget({
     // clear svg and remove tool tips
     svg.selectAll("*").remove();
     widgetid = d3.select(widgetdiv).attr('id');
-    d3.selectAll(`div.d3-tip.${widgetid}`).remove();
+    d3.selectAll("div.d3-tip." + widgetid).remove();
     chartOpts = (ref = x.chartOpts) != null ? ref : [];
     width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : widgetdiv.clientWidth;
     height = (ref2 = chartOpts != null ? chartOpts.height : void 0) != null ? ref2 : widgetdiv.clientHeight;
