@@ -109,6 +109,8 @@ function(mat, group=NULL, rows=NULL, cols=NULL, reorder=FALSE, corr=NULL,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(
                                   browser.fill = TRUE,
+                                  browser.defaultWidth=chartOpts$width,
+                                  browser.defaultHeight=chartOpts$height,
                                   knitr.defaultWidth=1000,
                                   knitr.defaultHeight=1000/defaultAspect
                               ),

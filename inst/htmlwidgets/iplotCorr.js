@@ -14,7 +14,6 @@ HTMLWidgets.widget({
       x: null
     };
   },
-  //# https://github.com/Alanocallaghan/d3heatmap/blob/master/inst/htmlwidgets/d3heatmap.js
   renderValue: function(widgetdiv, x, instance) {
     return this.doRenderValue(widgetdiv, x, instance);
   },

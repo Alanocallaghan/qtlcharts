@@ -15,7 +15,6 @@ HTMLWidgets.widget({
           .attr("class", "qtlcharts")
         {x: null}
 
-    ## https://github.com/Alanocallaghan/d3heatmap/blob/master/inst/htmlwidgets/d3heatmap.js
     renderValue: (widgetdiv, x, instance) ->
         this.doRenderValue(widgetdiv, x, instance)
 
