@@ -12,7 +12,13 @@ HTMLWidgets.widget({
           .attr("height", height)
           .attr("class", "qtlcharts")
 
-    renderValue: (widgetdiv, x) ->
+    ## https://github.com/Alanocallaghan/d3heatmap/blob/master/inst/htmlwidgets/d3heatmap.js
+    renderValue: (widgetdiv, x, instance) ->
+        this.doRenderValue(widgetdiv, x, instance)
+
+    doRenderValue: (widgetdiv, x, instance) ->
+
+        instance.lastValue = x;
 
         svg = d3.select(widgetdiv).select("svg")
 
@@ -30,9 +36,8 @@ HTMLWidgets.widget({
 
         iboxplot(widgetdiv, x.data, chartOpts)
 
-    resize: (widgetdiv, width, height) ->
-        d3.select(widgetdiv).select("svg")
-          .attr("width", width)
-          .attr("height", height)
+    resize: (el, width, height, instance) ->
+        if (instance.lastValue) 
+            this.doRenderValue(el, instance.lastValue, instance)
 
 })

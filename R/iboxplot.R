@@ -52,6 +52,7 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(
+                                  browser.fill = TRUE,
                                   knitr.defaultWidth=1000,
                                   knitr.defaultHeight=1000/defaultAspect
                               ),
