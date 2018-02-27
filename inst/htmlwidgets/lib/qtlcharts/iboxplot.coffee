@@ -10,8 +10,8 @@
 iboxplot = (widgetdiv, data, chartOpts) ->
 
     # chartOpts start
-    width = chartOpts?.width ? 1000              # width of image in pixels
-    height = chartOpts?.height ? 900             # total height of image in pixels
+    width = chartOpts?.width ? widgetdiv.clientWidth              # width of image in pixels
+    height = chartOpts?.height ? widgetdiv.clientHeight             # total height of image in pixels
     margin = chartOpts?.margin ? {left:60, top:20, right:60, bottom: 40} # margins in pixels (left, top, right, bottom)
     ylab = chartOpts?.ylab ? "Response"          # y-axis label
     xlab = chartOpts?.xlab ? "Individuals"       # x-axis label
