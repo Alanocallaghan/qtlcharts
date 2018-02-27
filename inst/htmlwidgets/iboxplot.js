@@ -13,9 +13,6 @@ HTMLWidgets.widget({
   },
   doRenderValue: function(widgetdiv, x, instance) {
     var chartOpts, height, ref, ref1, ref2, svg, widgetid, width;
-    d3.selectAll(this.childNodes).each(function(d, i) {
-      return d.remove();
-    });
     svg = d3.select(widgetdiv.childNodes).select("svg");
     svg.selectAll("*").remove();
     widgetid = d3.select(widgetdiv).attr('id');
@@ -27,7 +24,7 @@ HTMLWidgets.widget({
     svg.attr("height", height);
     return iboxplot(widgetdiv, x.data, chartOpts);
   },
-  resize: function(el, width, height, instance) {
+  resize: function(widgetdiv, width, height, instance) {
     if (instance.lastValue) {
       return this.doRenderValue(el, instance.lastValue, instance);
     }
