@@ -64,9 +64,9 @@ iplotCorr = function(widgetdiv, data, chartOpts) {
   widgetdivid = d3.select(widgetdiv).attr('id');
   svg = d3.select(widgetdiv).select("svg");
   // panel for correlation image
-  corrplot = svg.append("g").attr("id", "corplot").attr("transform", `translate(${margin.left},${margin.top})`);
+  corrplot = svg.append("g").attr("id", "corplot").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
   // panel for scatterplot
-  scatterplot = svg.append("g").attr("id", "scatterplot").attr("transform", `translate(${margin.left * 2 + margin.right + panelwidth},${margin.top})`);
+  scatterplot = svg.append("g").attr("id", "scatterplot").attr("transform", "translate(" + (margin.left * 2 + margin.right + panelwidth) + "," + margin.top + ")");
   // no. data points
   nind = data.indID.length;
   nvar = data.var.length;
@@ -90,7 +90,7 @@ iplotCorr = function(widgetdiv, data, chartOpts) {
   }
   // gray background on scatterplot
   scatterplot.append("rect").attr("height", panelheight).attr("width", panelwidth).attr("fill", rectcolor).attr("stroke", "black").attr("stroke-width", 1).attr("pointer-events", "none");
-  corr_tip = d3.tip().attr('class', `d3-tip ${widgetdivid}`).html(function(d) {
+  corr_tip = d3.tip().attr('class', "d3-tip " + widgetdivid).html(function(d) {
     return d3.format(".2f")(d.value);
   }).direction('e').offset([0, 10]);
   corrplot.call(corr_tip);
@@ -138,7 +138,7 @@ iplotCorr = function(widgetdiv, data, chartOpts) {
       })();
     }
   }
-  scat_tip = d3.tip().attr('class', `d3-tip ${widgetdivid}`).html(function(d, i) {
+  scat_tip = d3.tip().attr('class', "d3-tip " + widgetdivid).html(function(d, i) {
     return data.indID[i];
   }).direction('e').offset([0, 10]);
   scatterplot.call(scat_tip);
@@ -151,7 +151,7 @@ iplotCorr = function(widgetdiv, data, chartOpts) {
     yScale = d3.scaleLinear().domain(d3.extent(data.dat[data.rows[j]])).range([panelheight - margin.inner, margin.inner]);
     // axis labels
     scatterplot.append("text").attr("id", "xaxis").attr("class", "axes").attr("x", panelwidth / 2).attr("y", panelheight + margin.bottom * 0.7).text(data.var[data.cols[i]]).attr("dominant-baseline", "middle").attr("text-anchor", "middle").attr("fill", "slateblue");
-    scatterplot.append("text").attr("id", "yaxis").attr("class", "axes").attr("x", -margin.left * 0.8).attr("y", panelheight / 2).text(data.var[data.rows[j]]).attr("dominant-baseline", "middle").attr("text-anchor", "middle").attr("transform", `rotate(270,${-margin.left * 0.8},${panelheight / 2})`).attr("fill", "slateblue");
+    scatterplot.append("text").attr("id", "yaxis").attr("class", "axes").attr("x", -margin.left * 0.8).attr("y", panelheight / 2).text(data.var[data.rows[j]]).attr("dominant-baseline", "middle").attr("text-anchor", "middle").attr("transform", "rotate(270," + (-margin.left * 0.8) + "," + (panelheight / 2) + ")").attr("fill", "slateblue");
     // axis scales
     xticks = xScale.ticks(5);
     yticks = yScale.ticks(5);

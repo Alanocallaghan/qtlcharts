@@ -48,12 +48,12 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
     # panel for correlation image
     corrplot = svg.append("g")
                  .attr("id", "corplot")
-                 .attr("transform", "translate(#{margin.left},#{margin.top})")
+                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
     # panel for scatterplot
     scatterplot = svg.append("g")
                      .attr("id", "scatterplot")
-                     .attr("transform", "translate(#{margin.left*2+margin.right+panelwidth},#{margin.top})")
+                     .attr("transform", "translate(" + (margin.left*2+margin.right+panelwidth) + "," + margin.top + ")")
 
     # no. data points
     nind = data.indID.length
@@ -84,7 +84,7 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
                .attr("pointer-events", "none")
 
     corr_tip = d3.tip()
-                .attr('class', "d3-tip #{widgetdivid}")
+                .attr('class', "d3-tip " + widgetdivid)
                 .html((d) -> d3.format(".2f")(d.value))
                 .direction('e')
                 .offset([0,10])
@@ -141,7 +141,7 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
             scatcolors = (colorScale[i] for i of d3.range(nGroup))
 
     scat_tip = d3.tip()
-                .attr('class', "d3-tip #{widgetdivid}")
+                .attr('class', "d3-tip " + widgetdivid)
                 .html((d,i) -> data.indID[i])
                 .direction('e')
                 .offset([0,10])
@@ -175,7 +175,7 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
                    .text(data.var[data.rows[j]])
                    .attr("dominant-baseline", "middle")
                    .attr("text-anchor", "middle")
-                   .attr("transform", "rotate(270,#{-margin.left*0.8},#{panelheight/2})")
+                   .attr("transform", "rotate(270," + (-margin.left*0.8) + "," + (panelheight/2) + ")")
                    .attr("fill", "slateblue")
         # axis scales
         xticks = xScale.ticks(5)
