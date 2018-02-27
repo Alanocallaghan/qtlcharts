@@ -28,11 +28,11 @@ HTMLWidgets.widget({
         d3.selectAll("div.d3-tip.#{widgetid}").remove()
 
         chartOpts = x.chartOpts ? [ ]
-        chartOpts.width = chartOpts?.width ? widgetdiv.clientWidth
-        chartOpts.height = chartOpts?.height ? widgetdiv.clientHeight
+        width = chartOpts?.width ? widgetdiv.clientWidth
+        height = chartOpts?.height ? widgetdiv.clientHeight
 
-        svg.attr("width", chartOpts.width)
-        svg.attr("height", chartOpts.height)
+        svg.attr("width", width)
+        svg.attr("height", height)
 
         iboxplot(widgetdiv, x.data, chartOpts)
 

@@ -16,18 +16,18 @@ HTMLWidgets.widget({
     return this.doRenderValue(widgetdiv, x, instance);
   },
   doRenderValue: function(widgetdiv, x, instance) {
-    var chartOpts, ref, ref1, ref2, svg, widgetid;
+    var chartOpts, height, ref, ref1, ref2, svg, widgetid, width;
     svg = d3.select(widgetdiv).select("svg");
     // clear svg and remove tool tips
     svg.selectAll("*").remove();
     widgetid = d3.select(widgetdiv).attr('id');
     d3.selectAll(`div.d3-tip.${widgetid}`).remove();
     chartOpts = (ref = x.chartOpts) != null ? ref : [];
-    chartOpts.width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : widgetdiv.clientWidth;
-    chartOpts.height = (ref2 = chartOpts != null ? chartOpts.height : void 0) != null ? ref2 : widgetdiv.clientHeight;
+    width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : widgetdiv.clientWidth;
+    height = (ref2 = chartOpts != null ? chartOpts.height : void 0) != null ? ref2 : widgetdiv.clientHeight;
     // revise size of svg and div container
-    svg.attr("width", chartOpts.width);
-    svg.attr("height", chartOpts.height);
+    svg.attr("width", width);
+    svg.attr("height", height);
     d3.select(widgetdiv).attr("style", `width:${chartOpts.width}px;height:${chartOpts.height}px;`);
     if (x.data.scatterplots) {
       return iplotCorr(widgetdiv, x.data, chartOpts);

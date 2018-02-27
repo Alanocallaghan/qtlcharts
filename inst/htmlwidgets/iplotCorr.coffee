@@ -28,13 +28,12 @@ HTMLWidgets.widget({
         d3.selectAll("div.d3-tip.#{widgetid}").remove()
 
         chartOpts = x.chartOpts ? [ ]
-        chartOpts.width = chartOpts?.width ? widgetdiv.clientWidth
-        chartOpts.height = chartOpts?.height ? widgetdiv.clientHeight
-
+        width = chartOpts?.width ? widgetdiv.clientWidth
+        height = chartOpts?.height ? widgetdiv.clientHeight
 
         # revise size of svg and div container
-        svg.attr("width", chartOpts.width)
-        svg.attr("height", chartOpts.height)
+        svg.attr("width", width)
+        svg.attr("height", height)
         d3.select(widgetdiv).attr("style", "width:#{chartOpts.width}px;height:#{chartOpts.height}px;")
 
         if x.data.scatterplots

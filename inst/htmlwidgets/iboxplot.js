@@ -12,7 +12,7 @@ HTMLWidgets.widget({
     return this.doRenderValue(widgetdiv, x, instance);
   },
   doRenderValue: function(widgetdiv, x, instance) {
-    var chartOpts, ref, ref1, ref2, svg, widgetid;
+    var chartOpts, height, ref, ref1, ref2, svg, widgetid, width;
     instance.lastValue = x;
     svg = d3.select(widgetdiv).select("svg");
     // clear svg and remove tool tips
@@ -20,10 +20,10 @@ HTMLWidgets.widget({
     widgetid = d3.select(widgetdiv).attr('id');
     d3.selectAll(`div.d3-tip.${widgetid}`).remove();
     chartOpts = (ref = x.chartOpts) != null ? ref : [];
-    chartOpts.width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : widgetdiv.clientWidth;
-    chartOpts.height = (ref2 = chartOpts != null ? chartOpts.height : void 0) != null ? ref2 : widgetdiv.clientHeight;
-    svg.attr("width", chartOpts.width);
-    svg.attr("height", chartOpts.height);
+    width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : widgetdiv.clientWidth;
+    height = (ref2 = chartOpts != null ? chartOpts.height : void 0) != null ? ref2 : widgetdiv.clientHeight;
+    svg.attr("width", width);
+    svg.attr("height", height);
     return iboxplot(widgetdiv, x.data, chartOpts);
   },
   resize: function(el, width, height, instance) {
