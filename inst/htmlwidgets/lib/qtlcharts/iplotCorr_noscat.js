@@ -53,7 +53,7 @@ iplotCorr_noscat = function(widgetdiv, data, chartOpts) {
   widgetdivid = d3.select(widgetdiv).attr('id');
   svg = d3.select(widgetdiv).select("svg");
   // panel for correlation image
-  corrplot = svg.append("g").attr("id", "corplot").attr("transform", `translate(${margin.left},${margin.top})`);
+  corrplot = svg.append("g").attr("id", "corplot").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
   // no. data points
   nind = data.indID.length;
   nvar = data.var.length;
@@ -75,7 +75,7 @@ iplotCorr_noscat = function(widgetdiv, data, chartOpts) {
       });
     }
   }
-  corr_tip = d3.tip().attr('class', `d3-tip ${widgetdivid}`).html(function(d) {
+  corr_tip = d3.tip().attr('class', "d3-tip " + widgetdivid).html(function(d) {
     return d3.format(".2f")(d.value);
   }).direction('e').offset([0, 10]);
   corrplot.call(corr_tip);

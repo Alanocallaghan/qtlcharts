@@ -36,7 +36,7 @@ iplotCorr_noscat = (widgetdiv, data, chartOpts) ->
     # panel for correlation image
     corrplot = svg.append("g")
                  .attr("id", "corplot")
-                 .attr("transform", "translate(#{margin.left},#{margin.top})")
+                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
     # no. data points
     nind = data.indID.length
@@ -58,7 +58,7 @@ iplotCorr_noscat = (widgetdiv, data, chartOpts) ->
 
 
     corr_tip = d3.tip()
-                .attr('class', "d3-tip #{widgetdivid}")
+                .attr('class', "d3-tip " + widgetdivid)
                 .html((d) -> d3.format(".2f")(d.value))
                 .direction('e')
                 .offset([0,10])
