@@ -31,7 +31,7 @@ HTMLWidgets.widget({
     // revise size of svg and div container
     svg.attr("width", width);
     svg.attr("height", height);
-    d3.select(widgetdiv).attr("style", `width:${chartOpts.width}px;height:${chartOpts.height}px;`);
+    d3.select(widgetdiv).attr("style", "width:" + chartOpts.width + "px;height:" + chartOpts.height + "px;");
     if (x.data.scatterplots) {
       return iplotCorr(widgetdiv, x.data, chartOpts);
     } else {
