@@ -13,7 +13,7 @@ HTMLWidgets.widget({
           .attr("width", width)
           .attr("height", height)
           .attr("class", "qtlcharts")
-        {lastValue: null}
+        {x: null}
 
     ## https://github.com/Alanocallaghan/d3heatmap/blob/master/inst/htmlwidgets/d3heatmap.js
     renderValue: (widgetdiv, x, instance) ->
@@ -21,8 +21,8 @@ HTMLWidgets.widget({
 
     doRenderValue: (widgetdiv, x, instance) ->
 
-        instance.lastValue = x
-        
+        instance.x = x
+
         svg = d3.select(widgetdiv).select("svg")
 
         # clear svg and remove tool tips
@@ -44,8 +44,8 @@ HTMLWidgets.widget({
         else
             iplotCorr_noscat(widgetdiv, x.data, chartOpts)
 
-    resize: (el, width, height, instance) ->
-        if (instance.lastValue) 
-            this.doRenderValue(el, instance.lastValue, instance)
+    resize: (widgetdiv, width, height, instance) ->
+        if (instance.x) 
+            this.doRenderValue(widgetdiv, instance.x, instance)
 
 })
