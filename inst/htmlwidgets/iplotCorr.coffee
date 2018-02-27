@@ -28,8 +28,9 @@ HTMLWidgets.widget({
         d3.selectAll("div.d3-tip.#{widgetid}").remove()
 
         chartOpts = x.chartOpts ? [ ]
-        chartOpts.width = chartOpts?.width ? svg.attr("width")
-        chartOpts.height = chartOpts?.height ? svg.attr("height")
+        chartOpts.width = chartOpts?.width ? widgetdiv.clientWidth
+        chartOpts.height = chartOpts?.height ? widgetdiv.clientHeight
+
 
         # revise size of svg and div container
         svg.attr("width", chartOpts.width)

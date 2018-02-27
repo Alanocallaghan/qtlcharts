@@ -20,8 +20,8 @@ HTMLWidgets.widget({
     widgetid = d3.select(widgetdiv).attr('id');
     d3.selectAll(`div.d3-tip.${widgetid}`).remove();
     chartOpts = (ref = x.chartOpts) != null ? ref : [];
-    chartOpts.width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : svg.attr("width");
-    chartOpts.height = (ref2 = chartOpts != null ? chartOpts.height : void 0) != null ? ref2 : svg.attr("height");
+    chartOpts.width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : widgetdiv.clientWidth;
+    chartOpts.height = (ref2 = chartOpts != null ? chartOpts.height : void 0) != null ? ref2 : widgetdiv.clientHeight;
     svg.attr("width", chartOpts.width);
     svg.attr("height", chartOpts.height);
     return iboxplot(widgetdiv, x.data, chartOpts);
