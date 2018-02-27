@@ -18,7 +18,7 @@ HTMLWidgets.widget({
 
     doRenderValue: (widgetdiv, x, instance) ->
 
-        svg = d3.select(widgetdiv.childNodes).select("svg");
+        svg = d3.select(widgetdiv).select("svg")
 
         # clear svg and remove tool tips
         svg.selectAll("*").remove()
