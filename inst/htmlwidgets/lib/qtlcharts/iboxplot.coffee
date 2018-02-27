@@ -166,8 +166,8 @@ iboxplot = (widgetdiv, data, chartOpts) ->
 
     # colors for quantile curves
     if qucolors? and qucolors.length < (nQuant-1)/2+1
-        displayError("Not enough quantile colors: #{qucolors.length} but need #{(nQuant-1)/2+1}",
-                     "error_#{chartdivid}")
+        displayError("Not enough quantile colors: " + qucolors.length + " but need "+ (nQuant-1)/2+1,
+                     "error_" + chartdivid)
         qucolors = null
     unless qucolors?
         tmp = d3.schemeCategory10
@@ -192,7 +192,7 @@ iboxplot = (widgetdiv, data, chartOpts) ->
            .attr("fill", "none")
 
     indtip = d3.tip()
-               .attr('class', "d3-tip #{widgetdivid}")
+               .attr('class', "d3-tip " + widgetdivid)
                .html((d) -> d)
                .direction('e')
                .offset([0,10])
@@ -207,7 +207,7 @@ iboxplot = (widgetdiv, data, chartOpts) ->
                        .append("rect")
                        .attr("x", (d) -> xScale(d) - recWidth/2)
                        .attr("y", (d) -> yScale(data.quant[nQuant-1][d]))
-                       .attr("id", (d) -> "rect#{data.ind[d]}")
+                       .attr("id", (d) -> "rect" + data.ind[d])
                        .attr("width", recWidth)
                        .attr("height", (d) ->
                               yScale(data.quant[0][d]) - yScale(data.quant[nQuant-1][d]))
@@ -222,7 +222,7 @@ iboxplot = (widgetdiv, data, chartOpts) ->
                  .append("circle")
                  .attr("cx", (d) -> xScale(d) - recWidth/2)
                  .attr("cy", (d) -> yScale(data.quant[(nQuant-1)/2][d]))
-                 .attr("id", (d,i) -> "hiddenpoint#{i}")
+                 .attr("id", (d,i) -> "hiddenpoint" + i)
                  .attr("r", 1)
                  .attr("opacity", 0)
                  .attr("pointer-events", "none")
@@ -250,7 +250,7 @@ iboxplot = (widgetdiv, data, chartOpts) ->
              .enter()
              .append("text")
              .attr("class", "qu")
-             .text( (d) -> "#{d*100}%")
+             .text( (d) -> d*100 + "%")
              .attr("x", width)
              .attr("y", (d,i) -> yScale(((i+0.5)/nQuant/2 + 0.25) * (topylim[1] - topylim[0]) + topylim[0]))
              .attr("fill", (d,i) -> qucolors[i])
@@ -271,7 +271,7 @@ iboxplot = (widgetdiv, data, chartOpts) ->
     lowsvg = d3.select(widgetdiv).select("svg")
                .append("g")
                    .attr("id", "lower_svg")
-                   .attr("transform", "translate(0,#{halfheight})")
+                   .attr("transform", "translate(0," + halfheight + ")")
                .append("svg")
                .attr("height", halfheight)
                .attr("width", width)
@@ -348,36 +348,36 @@ iboxplot = (widgetdiv, data, chartOpts) ->
         clickStatus.push(0)
 
     longRect.on "mouseover", (d,i) ->
-                     d3.select("rect#rect#{data.ind[d]}")
+                     d3.select("rect#rect" + data.ind[d])
                        .attr("opacity", "1")
                      d3.select("#histline")
                        .datum(data.counts[d])
                        .attr("d", histline)
-                     circle = d3.select("circle#hiddenpoint#{i}")
+                     circle = d3.select("circle#hiddenpoint" + i)
                      indtip.show(data.ind[i], circle.node())
             .on "mouseout", (d) ->
                      indtip.hide()
                      if !clickStatus[d]
-                         d3.select("rect#rect#{data.ind[d]}").attr("opacity", "0")
+                         d3.select("rect#rect" + data.ind[d]).attr("opacity", "0")
 
             .on "click", (d) ->
                      clickStatus[d] = 1 - clickStatus[d]
-                     d3.select("rect#rect#{data.ind[d]}").attr("opacity", clickStatus[d])
+                     d3.select("rect#rect" + data.ind[d]).attr("opacity", clickStatus[d])
                      if clickStatus[d]
                          curcolor = histcolors.shift()
                          histcolors.push(curcolor)
 
-                         d3.select("rect#rect#{data.ind[d]}").attr("fill", curcolor)
+                         d3.select("rect#rect" + data.ind[d]).attr("fill", curcolor)
 
                          grp4BkgdHist.append("path")
                                      .datum(data.counts[d])
                                      .attr("d", histline)
-                                     .attr("id", "path#{data.ind[d]}")
+                                     .attr("id", "path" + data.ind[d])
                                      .attr("fill", "none")
                                      .attr("stroke", curcolor)
                                      .attr("stroke-width", "2")
                      else
-                         d3.select("path#path#{data.ind[d]}").remove()
+                         d3.select("path#path" + data.ind[d]).remove()
 
     # box around the outside
     lowsvg.append("rect")
@@ -394,7 +394,7 @@ iboxplot = (widgetdiv, data, chartOpts) ->
        .attr("x", margin.left*0.2)
        .attr("y", halfheight/2)
        .attr("fill", "slateblue")
-       .attr("transform", "rotate(270 #{margin.left*0.2} #{halfheight/2})")
+       .attr("transform", "rotate(270 " + (margin.left*0.2) + "" + (halfheight/2)  + ")")
        .attr("dominant-baseline", "middle")
        .attr("text-anchor", "middle")
 

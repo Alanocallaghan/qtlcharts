@@ -141,7 +141,7 @@ iboxplot = function(widgetdiv, data, chartOpts) {
   }).attr("dominant-baseline", "middle").attr("text-anchor", "middle");
   // colors for quantile curves
   if ((qucolors != null) && qucolors.length < (nQuant - 1) / 2 + 1) {
-    displayError(`Not enough quantile colors: ${qucolors.length} but need ${(nQuant - 1) / 2 + 1}`, `error_${chartdivid}`);
+    displayError("Not enough quantile colors: " + qucolors.length + " but need " + (nQuant - 1) / 2 + 1, "error_" + chartdivid);
     qucolors = null;
   }
   if (qucolors == null) {
@@ -167,7 +167,7 @@ iboxplot = function(widgetdiv, data, chartOpts) {
   for (j = o = 0, ref12 = nQuant; 0 <= ref12 ? o < ref12 : o > ref12; j = 0 <= ref12 ? ++o : --o) {
     curves.append("path").datum(indindex).attr("d", quline(j)).attr("class", "line").attr("stroke", qucolors[j]).attr("pointer-events", "none").attr("fill", "none");
   }
-  indtip = d3.tip().attr('class', `d3-tip ${widgetdivid}`).html(function(d) {
+  indtip = d3.tip().attr('class', "d3-tip " + widgetdivid).html(function(d) {
     return d;
   }).direction('e').offset([0, 10]);
   svg.call(indtip);
@@ -178,7 +178,7 @@ iboxplot = function(widgetdiv, data, chartOpts) {
   }).attr("y", function(d) {
     return yScale(data.quant[nQuant - 1][d]);
   }).attr("id", function(d) {
-    return `rect${data.ind[d]}`;
+    return "rect" + data.ind[d];
   }).attr("width", recWidth).attr("height", function(d) {
     return yScale(data.quant[0][d]) - yScale(data.quant[nQuant - 1][d]);
   }).attr("fill", "purple").attr("stroke", "none").attr("opacity", "0").attr("pointer-events", "none");
@@ -187,7 +187,7 @@ iboxplot = function(widgetdiv, data, chartOpts) {
   }).attr("cy", function(d) {
     return yScale(data.quant[(nQuant - 1) / 2][d]);
   }).attr("id", function(d, i) {
-    return `hiddenpoint${i}`;
+    return "hiddenpoint" + i;
   }).attr("r", 1).attr("opacity", 0).attr("pointer-events", "none");
   // vertical rectangles representing each array
   longRectGrp = svg.append("g").attr("id", "longRect");
@@ -197,7 +197,7 @@ iboxplot = function(widgetdiv, data, chartOpts) {
   // label quantiles on right
   rightAxis = svg.append("g").attr("id", "rightAxis");
   rightAxis.selectAll("empty").data(data.qu).enter().append("text").attr("class", "qu").text(function(d) {
-    return `${d * 100}%`;
+    return d * 100 + "%";
   }).attr("x", width).attr("y", function(d, i) {
     return yScale(((i + 0.5) / nQuant / 2 + 0.25) * (topylim[1] - topylim[0]) + topylim[0]);
   }).attr("fill", function(d, i) {
@@ -206,7 +206,7 @@ iboxplot = function(widgetdiv, data, chartOpts) {
   // box around the outside
   svg.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", halfheight - margin.top - margin.bottom).attr("width", width - margin.left - margin.right).attr("stroke", "black").attr("stroke-width", 2).attr("fill", "none");
   // lower svg
-  lowsvg = d3.select(widgetdiv).select("svg").append("g").attr("id", "lower_svg").attr("transform", `translate(0,${halfheight})`).append("svg").attr("height", halfheight).attr("width", width).attr("class", "qtlcharts");
+  lowsvg = d3.select(widgetdiv).select("svg").append("g").attr("id", "lower_svg").attr("transform", "translate(0," + halfheight + ")").append("svg").attr("height", halfheight).attr("width", width).attr("class", "qtlcharts");
   lo = data.breaks[0] - (data.breaks[1] - data.breaks[0]);
   hi = data.breaks[data.breaks.length - 1] + (data.breaks[1] - data.breaks[0]);
   lowxScale = d3.scaleLinear().domain([lo, hi]).range([margin.left, width - margin.right]);
@@ -243,31 +243,31 @@ iboxplot = function(widgetdiv, data, chartOpts) {
   }
   longRect.on("mouseover", function(d, i) {
     var circle;
-    d3.select(`rect#rect${data.ind[d]}`).attr("opacity", "1");
+    d3.select("rect#rect" + data.ind[d]).attr("opacity", "1");
     d3.select("#histline").datum(data.counts[d]).attr("d", histline);
-    circle = d3.select(`circle#hiddenpoint${i}`);
+    circle = d3.select("circle#hiddenpoint" + i);
     return indtip.show(data.ind[i], circle.node());
   }).on("mouseout", function(d) {
     indtip.hide();
     if (!clickStatus[d]) {
-      return d3.select(`rect#rect${data.ind[d]}`).attr("opacity", "0");
+      return d3.select("rect#rect" + data.ind[d]).attr("opacity", "0");
     }
   }).on("click", function(d) {
     var curcolor;
     clickStatus[d] = 1 - clickStatus[d];
-    d3.select(`rect#rect${data.ind[d]}`).attr("opacity", clickStatus[d]);
+    d3.select("rect#rect" + data.ind[d]).attr("opacity", clickStatus[d]);
     if (clickStatus[d]) {
       curcolor = histcolors.shift();
       histcolors.push(curcolor);
-      d3.select(`rect#rect${data.ind[d]}`).attr("fill", curcolor);
-      return grp4BkgdHist.append("path").datum(data.counts[d]).attr("d", histline).attr("id", `path${data.ind[d]}`).attr("fill", "none").attr("stroke", curcolor).attr("stroke-width", "2");
+      d3.select("rect#rect" + data.ind[d]).attr("fill", curcolor);
+      return grp4BkgdHist.append("path").datum(data.counts[d]).attr("d", histline).attr("id", "path" + data.ind[d]).attr("fill", "none").attr("stroke", curcolor).attr("stroke-width", "2");
     } else {
-      return d3.select(`path#path${data.ind[d]}`).remove();
+      return d3.select("path#path" + data.ind[d]).remove();
     }
   });
   // box around the outside
   lowsvg.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", halfheight - margin.bottom - margin.top).attr("width", width - margin.left - margin.right).attr("stroke", "black").attr("stroke-width", 2).attr("fill", "none");
-  svg.append("text").text(ylab).attr("x", margin.left * 0.2).attr("y", halfheight / 2).attr("fill", "slateblue").attr("transform", `rotate(270 ${margin.left * 0.2} ${halfheight / 2})`).attr("dominant-baseline", "middle").attr("text-anchor", "middle");
+  svg.append("text").text(ylab).attr("x", margin.left * 0.2).attr("y", halfheight / 2).attr("fill", "slateblue").attr("transform", "rotate(270 " + (margin.left * 0.2) + "" + (halfheight / 2) + ")").attr("dominant-baseline", "middle").attr("text-anchor", "middle");
   lowsvg.append("text").text(ylab).attr("x", (width - margin.left - margin.bottom) / 2 + margin.left).attr("y", halfheight - margin.bottom * 0.2).attr("fill", "slateblue").attr("dominant-baseline", "middle").attr("text-anchor", "middle");
   svg.append("text").text(xlab).attr("x", (width - margin.left - margin.bottom) / 2 + margin.left).attr("y", halfheight - margin.bottom * 0.2).attr("fill", "slateblue").attr("dominant-baseline", "middle").attr("text-anchor", "middle");
   if (chartOpts.heading != null) {
