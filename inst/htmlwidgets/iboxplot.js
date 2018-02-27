@@ -13,9 +13,10 @@ HTMLWidgets.widget({
   },
   doRenderValue: function(widgetdiv, x, instance) {
     var chartOpts, height, ref, ref1, ref2, svg, widgetid, width;
-    instance.lastValue = x;
-    svg = d3.select(widgetdiv).select("svg");
-    // clear svg and remove tool tips
+    d3.selectAll(this.childNodes).each(function(d, i) {
+      return d.remove();
+    });
+    svg = d3.select(widgetdiv.childNodes).select("svg");
     svg.selectAll("*").remove();
     widgetid = d3.select(widgetdiv).attr('id');
     d3.selectAll(`div.d3-tip.${widgetid}`).remove();

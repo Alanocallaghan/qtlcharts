@@ -18,9 +18,10 @@ HTMLWidgets.widget({
 
     doRenderValue: (widgetdiv, x, instance) ->
 
-        instance.lastValue = x;
+        d3.selectAll(this.childNodes)
+            .each((d, i) -> d.remove());
 
-        svg = d3.select(widgetdiv).select("svg")
+        svg = d3.select(widgetdiv.childNodes).select("svg");
 
         # clear svg and remove tool tips
         svg.selectAll("*").remove()
@@ -36,7 +37,7 @@ HTMLWidgets.widget({
 
         iboxplot(widgetdiv, x.data, chartOpts)
 
-    resize: (el, width, height, instance) ->
+    resize: (widgetdiv, width, height, instance) ->
         if (instance.lastValue) 
             this.doRenderValue(el, instance.lastValue, instance)
 
