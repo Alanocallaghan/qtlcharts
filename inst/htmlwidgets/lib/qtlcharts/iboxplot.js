@@ -10,7 +10,7 @@
 var iboxplot;
 
 iboxplot = function(widgetdiv, data, chartOpts) {
-  var Baxis, BaxisData, Laxis, LaxisData, botylim, br2, chartdivid, circles, clickStatus, color, curves, d, fix4hist, grp4BkgdHist, halfheight, height, hi, hist, histcolors, histline, i, indRect, indRectGrp, indindex, indtip, j, k, l, len, len1, len2, len3, lo, longRect, longRectGrp, lowBaxis, lowBaxisData, lowsvg, lowxScale, lowyScale, m, margin, midQuant, n, nQuant, o, p, qucolors, quline, r, randomInd, recWidth, rectcolor, ref, ref1, ref10, ref11, ref12, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, rightAxis, svg, tmp, topylim, widgetdivid, width, xScale, xlab, yScale, ylab;
+  var Baxis, BaxisData, Laxis, LaxisData, botylim, br2, chartdivid, circles, clickStatus, color, counts, curves, d, fix4hist, grp4BkgdHist, halfheight, height, hi, hist, histcolors, histline, i, indRect, indRectGrp, indindex, indtip, j, k, l, len, len1, len2, len3, lo, longRect, longRectGrp, lowBaxis, lowBaxisData, lowsvg, lowxScale, lowyScale, m, margin, midQuant, n, nQuant, o, p, qucolors, quline, r, randomInd, recWidth, rectcolor, ref, ref1, ref10, ref11, ref12, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, rightAxis, svg, tmp, topylim, widgetdivid, width, xScale, xlab, yScale, ylab;
   // chartOpts start
   width = (ref = chartOpts != null ? chartOpts.width : void 0) != null ? ref : widgetdiv.clientWidth; // width of image in pixels
   height = (ref1 = chartOpts != null ? chartOpts.height : void 0) != null ? ref1 : widgetdiv.clientHeight; // total height of image in pixels
@@ -86,8 +86,9 @@ iboxplot = function(widgetdiv, data, chartOpts) {
     x.push(0);
     return x;
   };
-  for (i in data.counts) {
-    data.counts[i] = fix4hist(data.counts[i]);
+  counts = data.counts.slice();
+  for (i in counts) {
+    counts[i] = fix4hist(counts[i]);
   }
   // number of quantiles
   nQuant = data.quant.length;

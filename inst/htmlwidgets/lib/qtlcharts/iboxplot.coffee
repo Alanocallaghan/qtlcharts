@@ -62,8 +62,9 @@ iboxplot = (widgetdiv, data, chartOpts) ->
         x.push(0)
         x
 
-    for i of data.counts
-        data.counts[i] = fix4hist(data.counts[i])
+    counts = data.counts.slice()
+    for i of counts
+        counts[i] = fix4hist(counts[i])
 
     # number of quantiles
     nQuant = data.quant.length
