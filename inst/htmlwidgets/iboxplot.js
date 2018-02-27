@@ -26,10 +26,6 @@ HTMLWidgets.widget({
     svg.attr("height", chartOpts.height);
     return iboxplot(widgetdiv, x.data, chartOpts);
   },
-  resize: function(widgetdiv, width, height) {
-    d3.select(widgetdiv).select("svg").attr("width", width).attr("height", height);
-    return iboxplot(widgetdiv);
-  },
   resize: function(el, width, height, instance) {
     if (instance.lastValue) {
       return this.doRenderValue(el, instance.lastValue, instance);
